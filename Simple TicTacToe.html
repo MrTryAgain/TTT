@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Tic Tac Toe</title>
+</head>
+
+<!-- Erklärungen  -->
+<body>
+
+
+    <style>
+
+        body{
+            background-color: darkgrey;
+            font-family: sans-serif;
+        }
+/*Infobox, Ausgabe in Textform der Spielzustände*/
+        .infofeld{
+            height: 150px;
+            text-align: center;
+            color: darkred;
+            font-weight: bolder;
+            font-size: 30px;
+        }
+/*absolute = näher am rechten rand, nähester nächster "Anker"
+transform = vom Rand und oben je 50% des verfügbaren Abstandes*/
+        .spielfeld{
+            height: 300px;
+            width: 300px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+             
+        }
+/*Reihe = 1/3 der Höhe, 32% weil 2px Border dazukommt*/
+        .row{
+            height: 32%;
+        }
+/*Spalte
+float = ausgleichen
+font-size = Grösse des Inhalts (X oder O)
+test- align = zentrierter Inhalts
+cursor = wenn der Mauszeiger darauf zeigt*/
+        .col{
+            height: 100%;
+            width: 32%;
+            border: 2px solid red;
+            float: left;
+            font-size: 70px;
+            font-weight: bolder;
+            color: slategray;
+            text-align: center;
+            cursor: pointer;
+        }
+/*Button zum neustarten*/
+        #restartButton{
+            height: 60px;
+            width: 160px;
+            font-size: 30px;
+            font-weight: bolder;
+            background-color: burlywood;
+            color: crimson;
+        }
+
+    </style>
+
+    <script>
+/*Logikblock
+var turn = 1; bedeutet eine var gesetzt als Turn1, (was passiert beim Befehl "turn" gleich wie 1 ist)
+var win = -1 bedeutet, wenn Kondition win gleich wie "blank ist"
+Clickcounter startet bei 0 Klicks
+matrix = Null Zustand ohne Zug oder Aktion vom Spieler, noch nichts ist passiert, YT Teil2 ab ca 4:50min
+Erklärung, wir brauchen noch 2 Koordinaten um zu wissen wo man sich gerade befindet
+-1 = bedeutet nix ist passiert, niemand hat geklickt bis jetzt
+*/    
+        var turn = 1;
+        var win = -1;
+        var clickCounter = 0;
+        var matrix = [
+            [-1, -1, -1],
+            [-1, -1, -1],
+            [-1, -1, -1]
+        ]
+
+/*die Funktion für den Neustart Button habe ich hier hinterlegt, simpel gelöst mit Reload der Seite (wie F5)*/
+        function resetButton() {
+            location.reload();
+            
+        }
+
+
+        function playerAction(elem, row, col) {
+
+/*Wenn das Feld nicht blank ist dann neu anfangen, wenn die win Kondition nicht wie Anfangsposition ist dann;*/            
+            if(elem.innerHTML != "") return;
+            if(win != -1) return;
+
+/*Clickcounter addiert immer eins dazu ++*/
+            clickCounter++;
+
+/*Spielerwechsel passiert hier, Position wird abgefragt anhand Koordinaten Reihe und Spalte, == bedeutet vergleichen mit, ist dasselbe wie und gibt dann aus im Infofeld die Meldung "Spieler sowieso ist dran" */          
+            matrix[row][col] = turn;
+            if(turn == 1) {
+                elem.innerHTML = "X";
+                document.getElementById("infofeld").innerHTML = "Spieler 2 ist dran";
+                turn = 2;
+/*und sonst Spieler 2 ist dran*/
+            }
+            else if(turn == 2) {
+                elem.innerHTML = "O";
+                document.getElementById("infofeld").innerHTML = "Spieler 1 ist dran";
+                turn = 1;
+            }
+           
+
+            
+/*i = 0 in dem Fall, Platzhalter für einen beliebigen Wert */              
+            for(var i=0; i< 3; i++) {
+            //Spalte überprüft
+            if(matrix[i][0] == matrix[i][1] && matrix[i][1] == matrix[i][2]) win = matrix[i][0];
+            
+//hier wird die Reihe überprüft, lernen!
+            if(matrix[0][i] == matrix[1][i] && matrix[1][i] == matrix[2][i]) win = matrix[0][i];
+            
+            if(win != -1) {
+            document.getElementById("infofeld").innerHTML = "Spieler " + win + " hat das Spiel gewonnen!";
+            }
+        }
+                
+//diagonale überprüfung, von links obennach rechts unten \ und rechts oben nach links unten /                
+            if(matrix[0][0] == matrix[1][1] == matrix[2][2]) win = matrix[1][1];
+            if(matrix[0][2] == matrix[1][1] == matrix[2][0]) win = matrix[1][1];
+        
+            if(win != -1) {
+            document.getElementById("infofeld").innerHTML = "Spieler " + win + " hat das Spiel gewonnen!";
+            }
+        
+            if(clickCounter == 9 && win == -1) {
+            document.getElementById("infofeld").innerHTML = "Leider ein Unentschieden!";
+        } 
+        }
+          
+
+        
+        
+    </script>
+
+    <div class="infofeld" id="infofeld"> Spieler 1 ist dran </div>
+
+    <!-- Spielfeld -->
+    <div class="spielfeld">
+        <!-- Reihe mit 3 Feldern -->
+        <div class="row">
+            <div class="col" onclick="playerAction(this, 0, 0)"></div>
+            <div class="col" onclick="playerAction(this, 0, 1)"></div>
+            <div class="col" onclick="playerAction(this, 0, 2)"></div>            
+        </div>
+        <!-- Reihe mit 3 Feldern, das This bezieht sich auf das Feld, zusätzlich Koordinaten als Sicherheitslinie, playerfunction befindet oben im script -->
+        <div class="row">
+            <div class="col" onclick="playerAction(this, 1, 0)"></div>
+            <div class="col" onclick="playerAction(this, 1, 1)"></div>
+            <div class="col" onclick="playerAction(this, 1, 2)"></div>
+        </div>
+        <!-- Reihe mit 3 Feldern -->
+        <div class="row">
+            <div class="col" onclick="playerAction(this, 2, 0)"></div>
+            <div class="col" onclick="playerAction(this, 2, 1)"></div>
+            <div class="col" onclick="playerAction(this, 2, 2)"></div>
+        </div>
+
+        <div>
+            <button id="restartButton" onclick="resetButton()">Neustart</button>
+            <!--<button type="reset" value="Reset">Neustart1</button>-->
+        </div>
+
+    </div>
+
+
+
+
+    
+</body>
+</html>

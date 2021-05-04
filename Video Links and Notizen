@@ -1,0 +1,119 @@
+
+Fancy Tic Tac Toe https://www.youtube.com/watch?v=Y-GkMjUZsmM
+Dom manipulation https://www.youtube.com/watch?v=y17RuWkWdn8
+Dom Traversal Methoden https://www.youtube.com/watch?v=v7rSSy8CaYE
+CSS Variablen https://www.youtube.com/watch?v=oZPR_78wCnY
+
+
+
+
+
+Teil 1 simple https://www.youtube.com/watch?v=PKvTLu2Qvrc
+Teil 2 simple "Logik" https://www.youtube.com/watch?v=G4RCMU7j7iI
+
+
+
+
+
+
+
+
+//Spielfeld
+absolut = näher am rechten rand, nächster "Anker"
+tran
+sform = vom Rand und oben je 50% des verfügbaren Abstandes
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//Reihe = 1/3 der Höhe, 32% weil 2px Border dazukommt
+
+
+
+//Spalte = 
+float = ausgleichen
+font-size = Grösse des Inhalts (X oder O)
+test- align = zentrierter Inhalts
+cursor = wenn der Mauszeiger darauf zeigt
+
+
+
+
+
+
+
+
+
+
+//LOGIK
+var turn = 1; bedeutet eine var gesetzt als Turn1, (was passiert beim Befehl "turn" gleich wie 1 ist)
+var win = -1 bedeutet 
+matrix = wenn kein spieler mehr ziehen kann, nachlesen hab ich nicht richtig verstanden, evtl JS eingebaute Regel, YT Teil2 ab ca 4:50min
+Erklärung, wir brauchen noch 2 Koordinaten um zu wissen wo man sich gerade befindet
+-1 = bedeutet nix ist passiert, niemand hat geklickt bis jetzt
+
+
+function = Spielerzug auf daen inhalt bezogen(X)
+//wenn Spieler gewonnen hat, neu anfangen
+wenn nix wie "var 1" ist, keinen input annehmen
+
+matrix = wenn etwas bei den jeweiligen Koordinaten ist, dann wechseln die Spieler ausser es gibt ein Spalten oder Reihen (diagonal, vertikal) matching, 3 Felder nebeneinander
+wenn turn1 passiert ist, dann gib (Spieler 2 ist dran) ins Infofeld aus und wechsle zu turn2(Spieler2)
+
+
+
+
+
+oder wenn turn2 passiert ist, dann platziere "O" ins Feld und gib im Infofeld "Spieler2 ist dran" aus und wechsle zu Spieler2
+
+
+//Hier sind die Regeln festgelegt auf welche oben erstellen Matrix bezug genohmen wird NACHLESEN! YT Teil 2 ab ca. 10:30min
+
+
+
+//Regel fü Diagonale (2x) festgelegt
+
+
+
+
+
+
+
+
+//Regel um das Spiel wissen zu lassen wenn ( nicht gleich -1 leer ist, kein Zug) dann gib im Infofeld aus Spieler bla bla hat gewonnen unter Bedingung WIn
+
+
+
+
+
+
+//wenn mehr als 9 mal geklickt wurde, Gewinn Bedingung
+
+
+
+
+
+
+
+
+
+//div = Klasse "Infofeld" mit unique ID Infofeld die ausgibt Text "Spieler 1 ist dran"
+
+
+//div = grosse Box mit einer Klasse mit Namen "Spielfeld", 
+
+Row = Klasse mit Reihen erstellt
+Feld in den Reihen erstellt (Row, Column), in der ein Befehl "Mausklick" ist "Spielerzug" hinterlegt ist, dazu die Logik
+nach "this" sind noch die Positions angabe hinterlegt, 0 für die Reihe und 0 für das Feld in der Reihe, also "0" Erste Reihe "0" Erstes Feld, usw. "0" Erste Reihe "1" 2 Zweites Feld, 0 weil null bedeutet in JS "1", fängt halt bei 0 an
+srgs<dvy  cb mhvjhf
